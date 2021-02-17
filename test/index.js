@@ -9,12 +9,20 @@ const assert = require('assert');
 
 const assertShim = require('..');
 
+const { AssertionError } = assert;
 const nodeVersion = process.version.slice(1).split('.').map(Number);
 
 function describeAssert(assertTest) {
-  it('is a function and the same as its .ok property', () => {
-    assert.strictEqual(assertTest, assertTest.ok);
+  it('is a function', () => {
     assert.strictEqual(typeof assertTest, 'function');
+  });
+
+  it('behaves like .ok', () => {
+    assertTest(true);
+    assert.throws(
+      () => assertTest(false),
+      AssertionError,
+    );
   });
 
   it('.strict is a function', () => {
@@ -23,6 +31,10 @@ function describeAssert(assertTest) {
 
   it('.strict behaves like .ok', () => {
     assertTest.strict(true);
+    assert.throws(
+      () => assertTest.strict(false),
+      AssertionError,
+    );
   });
 
   it('.strict === .strict.strict', () => {
