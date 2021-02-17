@@ -20,23 +20,51 @@ function describeMatch({ match }) {
     match('Hello', /^he/i);
   });
 
-  it('throws if first arg does not match second arg', () => {
-    const str = 'hello';
-    const pattern = /hi/;
+  for (const arg of [undefined, null, false, 0, '']) {
+    it(`throws with default message if third arg is ${inspect(arg)}`, () => {
+      const str = 'hello';
+      const pattern = /hi/;
+      assert.throws(
+        () => match(str, pattern, arg),
+        (err) => {
+          assert(err instanceof AssertionError);
+          assert.strictEqual(err.actual, str);
+          assert.strictEqual(err.expected, pattern);
+          assert.strictEqual(err.operator, 'match');
+          assert.strictEqual(
+            err.message,
+            `The input did not match the regular expression ${inspect(pattern)
+            }. Input:\n\n${inspect(str)}\n`,
+          );
+          return true;
+        },
+      );
+    });
+  }
+
+  for (const arg of ['example', {}, /example/]) {
+    it(`throws with ${inspect(arg)} as message`, () => {
+      const str = 'hello';
+      const pattern = /hi/;
+      assert.throws(
+        () => match(str, pattern, arg),
+        (err) => {
+          assert(err instanceof AssertionError);
+          assert.strictEqual(err.actual, str);
+          assert.strictEqual(err.expected, pattern);
+          assert.strictEqual(err.operator, 'match');
+          assert.strictEqual(err.message, String(arg));
+          return true;
+        },
+      );
+    });
+  }
+
+  it('throws Error third arg', () => {
+    const errTest = new Error('test');
     assert.throws(
-      () => match(str, pattern),
-      (err) => {
-        assert(err instanceof AssertionError);
-        assert.strictEqual(err.actual, str);
-        assert.strictEqual(err.expected, pattern);
-        assert.strictEqual(err.operator, 'match');
-        assert.strictEqual(
-          err.message,
-          `The input did not match the regular expression ${inspect(pattern)
-          }. Input:\n\n${inspect(str)}\n`,
-        );
-        return true;
-      },
+      () => match('hello', /hi/, errTest),
+      (err) => errTest === err,
     );
   });
 
