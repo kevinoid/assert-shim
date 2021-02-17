@@ -5,12 +5,12 @@
 
 'use strict';
 
-const modulename = require('..');
+const assertShim = require('..');
 
-describe('modulename', () => {
+describe('assertShim', () => {
   it('does something', (done) => {
-    // Assert something about modulename here
-    modulename.func();
+    // Assert something about assertShim here
+    assertShim.func();
     done();
   });
 });
