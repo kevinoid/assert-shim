@@ -26,7 +26,8 @@
   ],
   "main": "index.js",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./strict": "./strict.js"
   },
   "//": "All scripts should run in POSIX sh and Windows cmd.exe",
   "scripts": {
