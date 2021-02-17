@@ -1,6 +1,6 @@
 {
   "name": "@kevinoid/assert-shim",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Implementation of the assert module from Node.js 15 for Node.js 10 or later.",
   "keywords": [
     "assert",
