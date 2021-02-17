@@ -13,8 +13,9 @@ const { AssertionError } = assert;
 const nodeVersion = process.version.slice(1).split('.').map(Number);
 
 function describeAssert(assertTest) {
-  it('is a function', () => {
+  it('is a function named ok', () => {
     assert.strictEqual(typeof assertTest, 'function');
+    assert.strictEqual(assertTest.name, 'ok');
   });
 
   it('behaves like .ok', () => {
@@ -25,8 +26,9 @@ function describeAssert(assertTest) {
     );
   });
 
-  it('.strict is a function', () => {
+  it('.strict is a function named strict', () => {
     assert.strictEqual(typeof assertTest.strict, 'function');
+    assert.strictEqual(assertTest.strict.name, 'strict');
   });
 
   it('.strict behaves like .ok', () => {
