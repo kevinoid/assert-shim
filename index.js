@@ -22,6 +22,7 @@ assertShim.strict = function strict(...args) {
   return assert.strict(...args);
 };
 Object.assign(assertShim.strict, assert.strict);
+assertShim.strict.strict = assertShim.strict;
 
 // By default, export the original assert module.
 // If any properties need to be shimmed, assertShim is exported.
