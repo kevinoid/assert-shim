@@ -8,7 +8,7 @@
 const assert = require('assert');
 
 const assertShim = require('..');
-const assertStrict = require('../strict');
+const assertStrict = require('../strict.js');
 
 describe('assert-shim/strict', () => {
   it('is the same as require("assert-shim").strict', () => {
