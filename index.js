@@ -3,6 +3,7 @@
  *
  * @copyright Copyright 2021 Kevin Locke <kevin@kevinlocke.name>
  * @license MIT
+ * @module assert-shim
  */
 
 'use strict';
